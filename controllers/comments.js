@@ -1,0 +1,1 @@
+const { Article, Comment, Topic } = require('../models');

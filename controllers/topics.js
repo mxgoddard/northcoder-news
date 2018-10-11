@@ -10,3 +10,12 @@ exports.sendAllTopics = (req, res, next) => {
     })
     .catch(next);
 };
+
+/// GET /api/topics/:topic_slug/articles
+/// # Return all the articles for a certain topic
+/// # e.g: `/api/topics/football/articles`
+exports.sendTopicBySlug = (req, res, next) => {
+    const { slug } = req.params;
+    res.status(200);
+    res.send({slug: `slug`});
+}
