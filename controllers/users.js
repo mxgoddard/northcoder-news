@@ -8,3 +8,13 @@ exports.sendAllUsers = (req, res, next) => {
     })
     .catch(next)
 }
+
+exports.sendUserByUsername = (req, res, next) => {
+    const { username } = req.params;
+    return User.findOne({ username })
+    .then(user => {
+        if(!user) next();
+        res.status(201).send({ user });
+    })
+    .catch(next);
+};

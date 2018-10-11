@@ -3,7 +3,7 @@ const router = express.Router();
 const { sendAllEndpoints } = require('../controllers/general.js');
 const { sendAllTopics } = require('../controllers/topics.js');
 const { sendAllArticles } = require('../controllers/articles.js');
-const { sendAllUsers } = require('../controllers/users.js');
+const { sendAllUsers, sendUserByUsername } = require('../controllers/users.js');
 
 // API
 router
@@ -29,6 +29,8 @@ router
     .route('/users')
     .get(sendAllUsers);
 
-
+router
+    .route('/users/:username')
+    .get(sendUserByUsername);
 
 module.exports = router;
