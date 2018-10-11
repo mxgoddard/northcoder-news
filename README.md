@@ -127,3 +127,39 @@ Once you are happy with your seed/dev file, prepare your project for production.
 Finally, you should write a README for this project (and remove this one). The README should be broken down like this: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
 
 It should also include the link where your herokuapp is hosted.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Routes to do:
+
+GET /api 
+# Serves an HTML page with documentation for all the available endpoints
+GET /api/topics (done)
+# Get all the topics
+GET /api/topics/:topic_slug/articles (done)
+# Return all the articles for a certain topic
+# e.g: `/api/topics/football/articles`
+POST /api/topics/:topic_slug/articles
+# Add a new article to a topic. This route requires a JSON body with title and body key value pairs
+# e.g: `{ "title": "new article", "body": "This is my new article content", "created_by": "user_id goes here"}`
+GET /api/articles (done)
+# Returns all the articles
+GET /api/articles/:article_id (done)
+# Get an individual article
+GET /api/articles/:article_id/comments
+# Get all the comments for a individual article
+POST /api/articles/:article_id/comments
+# Add a new comment to an article. This route requires a JSON body with body and created_by key value pairs
+# e.g: `{"body": "This is my new comment", "created_by": "user_id goes here"}`
+PATCH /api/articles/:article_id
+# Increment or Decrement the votes of an article by one. This route requires a vote query of 'up' or 'down'
+# e.g: `/api/articles/:article_id?vote=up`
+PATCH /api/comments/:comment_id
+# Increment or Decrement the votes of a comment by one. This route requires a vote query of 'up' or 'down'
+# e.g: `/api/comments/:comment_id?vote=down`
+DELETE /api/comments/:comment_id
+# Deletes a comment
+GET /api/users/:username (done)
+# e.g: `/api/users/mitch123`
+# Returns a JSON object with the profile data for the specified user.

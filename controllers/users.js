@@ -11,9 +11,10 @@ exports.sendAllUsers = (req, res, next) => {
 
 exports.sendUserByUsername = (req, res, next) => {
     const { username } = req.params;
-    return User.findOne({ username })
+    return User.findOne({ username: username })
     .then(user => {
-        if(!user) next();
+        console.log(user);
+        // if(!user) next({status: 400, msg: 'Invalid username'})
         res.status(201).send({ user });
     })
     .catch((err) => {

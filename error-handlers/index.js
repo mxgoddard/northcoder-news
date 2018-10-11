@@ -1,16 +1,16 @@
 // err = { status, msg }
-exports.handle404 = (err, req, res, next) => {
-    if(err.status === 404) res.send(err.status).send({ msg });
+exports.handle404 = ({status, msg}, req, res, next) => {
+    if(status === 404) res.sendStatus(status).send({ msg });
     else next({status, msg});
 };
 
-exports.handle400 = (err, req, res, next) => {
-    if(err.status === 400) res.send(err.status).send({ msg });
+exports.handle400 = ({status, msg}, req, res, next) => {
+    if(status === 400) res.sendStatus(status).send({ msg });
     else next({status, msg});
 };
 
-exports.handle500 = (err, req, res, next) => {
+exports.handle500 = ({status, msg}, req, res, next) => {
     // Do some error logging to fix in the future 'hypothetically'
-    console.error(err);
+    console.error(msg);
     res.status(500).send({ msg: 'Internal server error' });
 };
