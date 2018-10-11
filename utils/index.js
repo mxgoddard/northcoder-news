@@ -6,7 +6,7 @@ exports.createRefObject = (data, docs) => {
 };
 
 exports.formatArticleData = (articlesData, userDocs) => {
-    return articleData.map(article => {
+    return articlesData.map(article => {
         const belongs_to = article.topic;
         const created_by = userDocs.find(user => user.username === article.created_by)._id;
         return { ...article, belongs_to, created_by };

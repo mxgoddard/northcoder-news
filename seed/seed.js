@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { createRefObject, formatArticleData } = require('../utils');
+const { createRefObject, formatArticleData, formatCommentData } = require('../utils');
 const { Article, Comment, Topic, User } = require('../models'); 
 
 const seedDB = ({ articlesData, commentsData, topicsData, usersData }) => {
