@@ -9,3 +9,10 @@ exports.sendAllArticles = (req, res, next) => {
     .catch(next);
 };
 
+// GET /api/articles/:article_id
+// # Get an individual article
+exports.sendArticleByID = (req, res, next) => {
+    const { id } = req.params;
+    return Article.findById(id);
+    
+}

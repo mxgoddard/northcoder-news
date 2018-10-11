@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { sendAllEndpoints } = require('../controllers/general.js');
 const { sendAllTopics } = require('../controllers/topics.js');
-const { sendAllArticles } = require('../controllers/articles.js');
+const { sendAllArticles, sendArticleByID } = require('../controllers/articles.js');
 const { sendAllUsers, sendUserByUsername } = require('../controllers/users.js');
 
 // API
@@ -23,6 +23,10 @@ router
 router
     .route('/articles')
     .get(sendAllArticles);
+
+router
+    .route('/articles/:article_id')
+    .get(sendArticleByID);
 
 // USers
 router

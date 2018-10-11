@@ -16,5 +16,8 @@ exports.sendUserByUsername = (req, res, next) => {
         if(!user) next();
         res.status(201).send({ user });
     })
-    .catch(next);
+    .catch((err) => {
+        if(err.name === 'CastError') next({status: 400, msg: 'Invalid username'})
+        else next(err);
+    })
 };
