@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use('/api', router);
 
 // Error handling
-app.use('/*', (req, res, next) => ({status: 404, msg: 'Page not found'}));
+app.use('/*', (req, res, next) => next({status: 404, msg: `${req.originalUrl} does not exist`}));
 app.use(handle400);
 app.use(handle404);
 app.use(handle500);
