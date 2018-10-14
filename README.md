@@ -133,36 +133,7 @@ It should also include the link where your herokuapp is hosted.
 
 Routes to do:
 
-GET /api 
-# Serves an HTML page with documentation for all the available endpoints
-GET /api/topics (done)
-# Get all the topics
-GET /api/topics/:topic_slug/articles (done)
-# Return all the articles for a certain topic
-# e.g: `/api/topics/football/articles`
-POST /api/topics/:topic_slug/articles (done)
-# Add a new article to a topic. This route requires a JSON body with title and body key value pairs
-# e.g: `{ "title": "new article", "body": "This is my new article content", "created_by": "user_id goes here"}`
-GET /api/articles (done)
-# Returns all the articles
-GET /api/articles/:article_id (done)
-# Get an individual article
-GET /api/articles/:article_id/comments (done)
-# Get all the comments for a individual article
-POST /api/articles/:article_id/comments (done)
-# Add a new comment to an article. This route requires a JSON body with body and created_by key value pairs
-# e.g: `{"body": "This is my new comment", "created_by": "user_id goes here"}`
-PATCH /api/articles/:article_id (done)
-# Increment or Decrement the votes of an article by one. This route requires a vote query of 'up' or 'down'
-# e.g: `/api/articles/:article_id?vote=up`
-PATCH /api/comments/:comment_id (done)
-# Increment or Decrement the votes of a comment by one. This route requires a vote query of 'up' or 'down'
-# e.g: `/api/comments/:comment_id?vote=down`
-DELETE /api/comments/:comment_id (done)
-# Deletes a comment
-GET /api/users/:username (done)
-# e.g: `/api/users/mitch123`
-# Returns a JSON object with the profile data for the specified user.
+
 
 404 - endpoint doesn't exist
 404 - parameter doesn't exist
@@ -173,20 +144,19 @@ Invalid queries should be ignored
 
 ---------------------------------
 
-# Northcoder Reddit
+# Northcoder's Reddit
 
 This is an express based API that serves information stored on the Northcoder reddit via a public API. The application is hosted with Heroku and uses MongoDB for data retrieval.
 
 ## Getting Started
 
-[The Site](https://ncreddit.herokuapp.com/)
+[The Northcoder Reddit](https://ncreddit.herokuapp.com/)
 
 ### Installation & Configuration
 
 If wanting to use this program for yourself, you will have to install some dependices.
 
 ```
-
 npm i body-parser
 
 npm i ejs
@@ -196,13 +166,11 @@ npm i express
 npm i mongodb
 
 npm i mongoose
-
 ```
 
 The below packages are only recommended if you want to test your program.
 
 ```
-
 npm i chai
 
 npm i mocha
@@ -210,13 +178,11 @@ npm i mocha
 npm i nodemon
 
 npm i supertest
-
 ```
 
 You will have to setup a config.js file anyone in your environment like below. This will be needed to store your configuration and required in when needing to listen.
 
 ```js
-
 let env = process.env.NODE_ENV || 'development';
 
 const config = {
@@ -226,7 +192,6 @@ const config = {
 }
 
 module.exports = config[env];
-
 ```
 
 ## Running Tests
@@ -238,9 +203,7 @@ If these steps haven't been completed, ensure that you complete them.
 * In your package.json, create a test script in the script section that is directed to your test file.
 
 ```js
-
 "test": "mocha ./spec/*.spec.js",
-
 ```
 
 * The *mocha* and *chai* packages should be installed, follow installation instructions above if they aren't.
@@ -248,13 +211,13 @@ If these steps haven't been completed, ensure that you complete them.
 * Now in the console run
 
 ```
-
 npm test
-
 ```
 
 ## Built With
 
 [Express](https://expressjs.com/)
+
 [EJS](http://ejs.co/)
+
 [MongoDB](https://www.mongodb.com/)
