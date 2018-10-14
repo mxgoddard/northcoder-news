@@ -44,16 +44,25 @@ exports.sendTopicBySlug = (req, res, next) => {
 // # Add a new article to a topic. This route requires a JSON body with title and body key value pairs
 // # e.g: `{ "title": "new article", "body": "This is my new article content", "created_by": "user_id goes here"}`
 exports.postArticleBySlug = (req, res, next) => {
-    const { topic_slug } = req.params,
-    newArticle = new Article(req.body);
-    newArticle.belongs_to = topic_slug;
-    return Topic.findOne({ slug: topic_slug })
-        .then(topic => {
-        if (!topic) throw { status: 400, message: 'Topic Does Not Exist' };
-        return newArticle.save();
-        })
-        .then(article => {
-        res.status(201).send({ article });
-        })
-      .catch(next);
+    const { topic_slug } = req.params;
+    // newArticle = new Article(req.body);
+    // newArticle.belongs_to = topic_slug;
+    const { body, title, created_by} = req.body
+
+    Article.create({ ...req.body, belongs_to: topic_slug })
+    .then(article => {
+      res.status(201).send(article)
+    })
+    .catch(err => console.log(err))
+    
+    // return Topic.findOne({ slug: topic_slug })
+    //     .then(topic => {
+    //       console.log(topic, '<<<<<<<<<< TOPIC')
+    //     if (!topic) next({ status: 400, message: 'Topic Does Not Exist' });
+    //       return newArticle.save();
+    //     })
+    //     .then(article => {
+    //     res.status(201).send({ article });
+    //     })
+    //   .catch(next);
 };

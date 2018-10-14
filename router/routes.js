@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { sendAllEndpoints } = require('../controllers/general.js');
 const { sendAllTopics, sendTopicBySlug, postArticleBySlug } = require('../controllers/topics.js');
-const { sendAllArticles, sendArticleByID } = require('../controllers/articles.js');
+const { sendAllArticles, sendArticleByID, getArticleComments, postArticleComment, patchArticleVotes } = require('../controllers/articles.js');
 const { sendAllUsers, sendUserByUsername } = require('../controllers/users.js');
+const { deleteCommentById, patchCommentVotes } = require('../controllers/comments.js');
 
 // API
 router
@@ -26,8 +27,14 @@ router
     .get(sendAllArticles);
 
 router
+    .route('/articles/:article_id/comments')
+    .get(getArticleComments)
+    .post(postArticleComment)
+
+router
     .route('/articles/:article_id')
-    .get(sendArticleByID);
+    .get(sendArticleByID)
+    .patch(patchArticleVotes);
 
 // Users
 router
@@ -37,5 +44,10 @@ router
 router
     .route('/users/:username')
     .get(sendUserByUsername);
+
+router
+    .route('/comments/:comment_id')
+    .delete(deleteCommentById)
+    .patch(patchCommentVotes);
 
 module.exports = router;

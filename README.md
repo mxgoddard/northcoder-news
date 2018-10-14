@@ -140,26 +140,32 @@ GET /api/topics (done)
 GET /api/topics/:topic_slug/articles (done)
 # Return all the articles for a certain topic
 # e.g: `/api/topics/football/articles`
-POST /api/topics/:topic_slug/articles
+POST /api/topics/:topic_slug/articles (done)
 # Add a new article to a topic. This route requires a JSON body with title and body key value pairs
 # e.g: `{ "title": "new article", "body": "This is my new article content", "created_by": "user_id goes here"}`
 GET /api/articles (done)
 # Returns all the articles
 GET /api/articles/:article_id (done)
 # Get an individual article
-GET /api/articles/:article_id/comments
+GET /api/articles/:article_id/comments (done)
 # Get all the comments for a individual article
-POST /api/articles/:article_id/comments
+POST /api/articles/:article_id/comments (done)
 # Add a new comment to an article. This route requires a JSON body with body and created_by key value pairs
 # e.g: `{"body": "This is my new comment", "created_by": "user_id goes here"}`
-PATCH /api/articles/:article_id
+PATCH /api/articles/:article_id (done)
 # Increment or Decrement the votes of an article by one. This route requires a vote query of 'up' or 'down'
 # e.g: `/api/articles/:article_id?vote=up`
-PATCH /api/comments/:comment_id
+PATCH /api/comments/:comment_id (done)
 # Increment or Decrement the votes of a comment by one. This route requires a vote query of 'up' or 'down'
 # e.g: `/api/comments/:comment_id?vote=down`
-DELETE /api/comments/:comment_id
+DELETE /api/comments/:comment_id (done)
 # Deletes a comment
 GET /api/users/:username (done)
 # e.g: `/api/users/mitch123`
 # Returns a JSON object with the profile data for the specified user.
+
+404 - endpoint doesn't exist
+404 - parameter doesn't exist
+400 - bad request, invalid param
+400 - post doesn't respond to schema
+Invalid queries should be ignored
