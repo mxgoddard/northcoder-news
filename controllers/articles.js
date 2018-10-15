@@ -19,8 +19,8 @@ exports.sendAllArticles = (req, res, next) => {
 
 // lean returns a JS object instead of a mongoose document
 exports.sendArticleByID = (req, res, next) => {
-    const { aID } = req.params;
-    return Article.findOne({ aID })
+    const { article_id } = req.params;
+    return Article.findById(article_id)
       .lean()
       .populate('created_by')
       .then(article => {
