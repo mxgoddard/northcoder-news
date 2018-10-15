@@ -38,7 +38,7 @@ $ npm i supertest
 
 ### Config File
 
-You will have to setup a config.js file anyone in your environment like below. This will be needed to store your configuration and required in when needing to listen.
+You will **have to** setup a config.js file anyone in your environment like below. This will be needed to store your configuration and required in when needing to listen.
 
 ```js
 let env = process.env.NODE_ENV || 'development';
