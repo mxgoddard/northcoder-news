@@ -90,18 +90,44 @@ npm test
 
 ## Routes
 
-```
+```js
+// Gets the applications homepage
 GET /api
+
+// Gets an object containing all topics
 GET /api/topics
+
+// Gets all articles with a specified topic
 GET /api/topics/:topic_slug/articles
+
+// Creates a new article with the specified topic
 POST /api/topics/:topic_slug/articles
+
+// Gets all the articles
 GET /api/articles
+
+// Gets a specific article by its ID
 GET /api/articles/:article_id
+
+// Get all the comments for the specified article
 GET /api/articles/:article_id/comments
+
+// Creates a comment for a specific article
 POST /api/articles/:article_id/comments
+
+// Updates the votes for a specific article
 PATCH /api/articles/:article_id
+
+// Updates the comments for a specific comment
 PATCH /api/comments/:comment_id
+
+// Deletes a comment dependent on its ID
 DELETE /api/comments/:comment_id
+
+// Gets an object of all the users
+GET /api/users
+
+// Gets a specific user by their username
 GET /api/users/:username
 ```
 
