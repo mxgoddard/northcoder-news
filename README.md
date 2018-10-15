@@ -77,17 +77,3 @@ npm test
 [MongoDB](https://www.mongodb.com/)
 
 -----------------------------------------------------------------------------------------------------------------------
-
-Routes to do:
-
-404 - endpoint doesn't exist
-
-404 - parameter doesn't exist
-
-400 - bad request, invalid param
-
-400 - post doesn't respond to schema
-
-Invalid queries should be ignored
-
----------------------------------
