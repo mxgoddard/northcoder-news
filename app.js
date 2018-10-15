@@ -5,6 +5,7 @@ const { DB_URL } = require('./config');
 const bodyParser = require('body-parser');
 const router = require('./router/routes.js');
 const { handle404, handle400, handle500 } = require('./error-handlers');
+const { sendAllEndpoints } = require('./controllers/general.js');
 
 mongoose.connect(DB_URL, () => {
     console.log(`Connected to mongodb server: ${DB_URL}`);
@@ -13,6 +14,7 @@ mongoose.connect(DB_URL, () => {
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
+app.get('/', sendAllEndpoints);
 app.use('/api', router);
 
 // Error handling
