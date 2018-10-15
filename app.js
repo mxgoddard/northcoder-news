@@ -7,7 +7,7 @@ const router = require('./router/routes.js');
 const { handle404, handle400, handle500 } = require('./error-handlers');
 
 mongoose.connect(DB_URL, () => {
-    console.log(`Connected to mongodb server`);
+    console.log(`Connected to mongodb server: ${DB_URL}`);
 });
 
 app.use(express.static('public'));

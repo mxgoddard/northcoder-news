@@ -1,4 +1,5 @@
-let env = process.env.NODE_ENV || 'production';
+let env = process.env.NODE_ENV || 'development';
+// Change to development if running locally, production for mongodb
 
 const config = {
     development: {
