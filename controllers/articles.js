@@ -1,4 +1,4 @@
-const { Article, Comment, Topic } = require('../models');
+const { Article, Comment } = require('../models');
 
 exports.sendAllArticles = (req, res, next) => {
     return Article.find()
@@ -9,22 +9,13 @@ exports.sendAllArticles = (req, res, next) => {
     .catch(next);
 };
 
-// GET /api/articles/:article_id
-// # Get an individual article
-// exports.sendArticleByID = (req, res, next) => {
-//     const { id } = req.params;   
-//     return Article.findById(id);
-    
-// }
 
-// lean returns a JS object instead of a mongoose document
 exports.sendArticleByID = (req, res, next) => {
     const { article_id } = req.params;
     return Article.findById(article_id)
       .lean()
       .populate('created_by')
       .then(article => {
-          // article._id or aID??
         return Promise.all([Comment.find({ belongs_to: article._id }), article]);
       })
       .then(([comments, article]) => {
@@ -36,6 +27,7 @@ exports.sendArticleByID = (req, res, next) => {
         else next(err);
       });
 };
+
 
 // Get all the comments for an article
 exports.getArticleComments = (req, res, next) => {
@@ -56,9 +48,6 @@ exports.getArticleComments = (req, res, next) => {
 
 
 // Post a comment for an article
-// POST /api/articles/:article_id/comments
-// # Add a new comment to an article. This route requires a JSON body with body and created_by key value pairs
-// # e.g: `{"body": "This is my new comment", "created_by": "user_id goes here"}`
 exports.postArticleComment = (req, res, next) => {
   const { article_id } = req.params; 
   const { body, votes, created_by } = req.body
@@ -67,22 +56,17 @@ exports.postArticleComment = (req, res, next) => {
   .then(comment => {
     res.status(201).send(comment)
   })
-  .catch(err => console.log(err))
+  .catch(next)
 };
 
-// body
-// votes
-// created_at
-// belongs_to
-// created_by
 
+// Updated articles votes
 exports.patchArticleVotes = (req, res, next) => {
   const { article_id } = req.params;
   const vote = req.query.vote;
 
   vote === 'up' ? vote=1 : vote = -1;
 
-  //get article
   return Article.findByIdAndUpdate(
     article_id,
     { $inc: { votes: vote } },

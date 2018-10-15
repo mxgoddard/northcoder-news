@@ -1,4 +1,4 @@
-const { Article, Comment, Topic } = require('../models');
+const { Comment } = require('../models');
 
 exports.deleteCommentById = (req, res, next) => {
     const { comment_id } = req.params;
@@ -15,7 +15,6 @@ exports.patchCommentVotes = (req, res, next) => {
     let vote = req.query.vote;
 
     vote === 'up' ? vote=1 : vote = -1;
-    //error check if it isn't up or down here
   
     return Comment.findByIdAndUpdate(
       comment_id,
