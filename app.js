@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-// const { DB_URL } = require('./config');
+const  DB_URL  = process.env.DB_URL || require('./config').DB_URL;
 const bodyParser = require('body-parser');
 const router = require('./router/routes.js');
 const { handle404, handle400, handle500 } = require('./error-handlers');
 const { sendAllEndpoints } = require('./controllers/general.js');
 
-mongoose.connect(process.env.PORT, () => {
+mongoose.connect(DB_URL, () => {
     console.log(`Connected to mongodb server`);
 });
 
