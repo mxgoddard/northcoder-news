@@ -6,12 +6,14 @@ const bodyParser = require('body-parser');
 const router = require('./router/routes.js');
 const { handle404, handle400, handle500 } = require('./error-handlers');
 const { sendAllEndpoints } = require('./controllers/general.js');
+const cors = require('cors');
 
 mongoose.connect(DB_URL, () => {
     console.log(`Connected to mongodb server`);
 });
 
 app.use(express.static('public'));
+app.use(cors());
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 app.get('/', sendAllEndpoints);
