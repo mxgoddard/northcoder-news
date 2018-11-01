@@ -65,11 +65,13 @@ exports.patchArticleVotes = (req, res, next) => {
   const { article_id } = req.params;
   const vote = req.query.vote;
 
-  vote === 'up' ? vote=1 : vote = -1;
+  let voteModifier = 0;
+  if (vote === 'up') voteModifier = 1;
+  if (vote === 'down') voteModifier = -1;
 
   return Article.findByIdAndUpdate(
     article_id,
-    { $inc: { votes: vote } },
+    { $inc: { votes: voteModifier } },
     { new: true }
   )
     .then(article => {
