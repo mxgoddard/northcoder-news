@@ -1,4 +1,4 @@
-const { Article, Comment, Topic } = require('../models');
+const { Article, Comment, Topic, User } = require('../models');
 
 
 // Gets all the topics
@@ -38,8 +38,10 @@ exports.postArticleBySlug = (req, res, next) => {
     const { topic_slug } = req.params;
     const { body, title, created_by} = req.body
 
-    Article.create({ ...req.body, belongs_to: topic_slug })
-    .then(article => {
+    Promise.all([ Article.create({ ...req.body, belongs_to: topic_slug }), User.findOne({_id: created_by}) ])
+    .then(([article, user]) => {
+      console.log(article);
+      console.log(user);
       res.status(201).send(article)
     })
     .catch(next)
