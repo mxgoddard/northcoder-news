@@ -42,6 +42,7 @@ exports.postArticleBySlug = (req, res, next) => {
     .then(([article, user]) => {
       console.log(article);
       console.log(user);
+      article.created_by = user;
       res.status(201).send(article)
     })
     .catch(next)
