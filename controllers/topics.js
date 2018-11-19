@@ -34,16 +34,28 @@ exports.sendTopicBySlug = (req, res, next) => {
 
 
 // Post article by topic
-exports.postArticleBySlug = (req, res, next) => {
-    const { topic_slug } = req.params;
-    const { body, title, created_by} = req.body
+// exports.postArticleBySlug = (req, res, next) => {
+//     const { topic_slug } = req.params;
+//     const { body, title, created_by} = req.body
 
-    Promise.all([ Article.create({ ...req.body, belongs_to: topic_slug }), User.findOne({_id: created_by}) ])
-    .then(([article, user]) => {
-      console.log(article);
-      console.log(user);
-      article.created_by = user;
-      res.status(201).send(article)
-    })
-    .catch(next)
+//     Promise.all([ Article.create({ ...req.body, belongs_to: topic_slug }), User.findOne({_id: created_by}) ])
+//     .then(([article, user]) => {
+//       console.log(article);
+//       console.log(user);
+//       article.created_by = user;
+//       res.status(201).send(article)
+//     })
+//     .catch(next)
+// };
+
+exports.createArticle = (req, res, next) => {
+	const { topic_slug } = req.params,
+    newArticle = new Article(req.body);
+  	newArticle.belongs_to = topic_slug;
+  	return Topic.findOne({ slug: topic_slug }).then(topic => {
+    	if (!topic) throw { status: 400, message: 'Topic Does Not Exist' };
+    	return newArticle.save();
+    }).then(article => {
+    	res.status(201).send({ article });
+    }).catch(next);
 };
