@@ -9,16 +9,16 @@ const { sendAllEndpoints } = require('./controllers/general.js');
 const cors = require('cors');
 
 mongoose.connect(DB_URL, { useNewUrlParser: true }, () => {
-    console.log(`Connected to mongodb server`);
+    console.log(`Connected to MongoDB`);
 });
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  });
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   });
 
 app.use(express.static('public'));
-// app.use(cors());
+app.use(cors());
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 app.get('/', sendAllEndpoints);
