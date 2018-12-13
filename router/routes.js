@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { sendAllEndpoints } = require('../controllers/general.js');
-const { sendAllTopics, sendTopicBySlug, postArticleBySlug } = require('../controllers/topics.js');
+const { sendAllTopics, sendTopicBySlug } = require('../controllers/topics.js');
 const { sendAllArticles, sendArticleByID, getArticleComments, postArticleComment, patchArticleVotes } = require('../controllers/articles.js');
 const { sendAllUsers, sendUserByUsername } = require('../controllers/users.js');
 const { deleteCommentById, patchCommentVotes } = require('../controllers/comments.js');
@@ -19,7 +19,7 @@ router
 router
     .route('/topics/:topic_slug/articles')
     .get(sendTopicBySlug)
-    .post(postArticleBySlug);
+    .post(sendTopicBySlug);
 
 // Articles
 router
