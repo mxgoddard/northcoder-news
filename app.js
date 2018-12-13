@@ -8,7 +8,7 @@ const { handle404, handle400, handle500 } = require('./error-handlers');
 const { sendAllEndpoints } = require('./controllers/general.js');
 const cors = require('cors');
 
-mongoose.connect(DB_URL, () => {
+mongoose.connect(DB_URL, { useNewUrlParser: true }, () => {
     console.log(`Connected to mongodb server`);
 });
 
