@@ -12,25 +12,48 @@ exports.sendAllTopics = (req, res, next) => {
 };
 
 
-exports.sendTopicBySlug = (req, res, next) => {
-    const { topic_slug } = req.params;
-    return Promise.all([Article.find({ belongs_to: topic_slug })
-        .populate('created_by')
-        .lean()
-        .exec(),
-        Comment.find()
-        .lean()
-      ])
-    .then(([articleDocs, commentDocs]) => {
-        if (articleDocs.length === 0) throw { status: 404, message: 'No Articles Found for Requested Topic' };
-        articles = articleDocs.map(article => {
-            const comments = commentDocs.filter(comment => comment.belongs_to.toString() === article._id.toString()).length;
-            return { ...article, comments };
-        });
-        res.status(200).send({ articles });
+// exports.sendTopicBySlug = (req, res, next) => {
+//     const { topic_slug } = req.params;
+//     return Promise.all([Article.find({ belongs_to: topic_slug })
+//         .populate('created_by')
+//         .lean()
+//         .exec(),
+//         Comment.find()
+//         .lean()
+//       ])
+//     .then(([articleDocs, commentDocs]) => {
+//         if (articleDocs.length === 0) throw { status: 404, message: 'No Articles Found for Requested Topic' };
+//         articles = articleDocs.map(article => {
+//             const comments = commentDocs.filter(comment => comment.belongs_to.toString() === article._id.toString()).length;
+//             return { ...article, comments };
+//         });
+//         res.status(200).send({ articles });
+//       })
+//       .catch(next);
+//   };
+
+  exports.sendTopicBySlug = (req, res, next) => {
+    const {topic_slug} = req.params;
+    const body = req.body;
+    const post = new Article({
+        title: body.title,
+        body: body.body,
+        belongs_to: topic_slug,
+        created_by: body.created_by,
       })
-      .catch(next);
-  };
+      post.save()
+        .then(postedArticle => {
+          return Article.findOne({'_id' : postedArticle._id}).populate('created_by').lean()
+        })
+        .then(foundArticle => {
+            let comment_count = 0;
+            const article = {...foundArticle, comment_count}
+            res.status(201).send({article})
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
 
 
 // Post article by topic
