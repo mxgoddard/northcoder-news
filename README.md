@@ -4,7 +4,9 @@ This is an express based API that serves information stored on the Northcoder re
 
 ## Getting Started
 
-[The Northcoder Reddit](https://ncreddit.herokuapp.com/)
+[Neddit](https://neddit.netlify.com)
+
+[The Northcoder Reddit API](https://ncreddit.herokuapp.com/)
 
 ## Installation & Configuration
 
